@@ -1,0 +1,29 @@
+WebSocket connection to 'ws://localhost:8080/sockjs-node/950/r0tso2hf/websocket' failed: Error during WebSocket handshake: Unexpected response code: 400
+WebSocketBrowserDriver @ websocket.js:6
+WebSocketTransport @ websocket.js:32
+./node_modules/sockjs-client/lib/main.js.SockJS._connect @ main.js:219
+./node_modules/sockjs-client/lib/main.js.SockJS._receiveInfo @ main.js:193
+g @ emitter.js:30
+./node_modules/sockjs-client/lib/event/emitter.js.EventEmitter.emit @ emitter.js:50
+(anonymous) @ info-receiver.js:67
+g @ emitter.js:30
+./node_modules/sockjs-client/lib/event/emitter.js.EventEmitter.emit @ emitter.js:50
+(anonymous) @ info-ajax.js:37
+g @ emitter.js:30
+./node_modules/sockjs-client/lib/event/emitter.js.EventEmitter.emit @ emitter.js:50
+xhr.onreadystatechange @ abstract-xhr.js:124
+VM116 sockjs.bundle.js:1 Uncaught Error: Incompatible SockJS! Main site uses: "1.1.5", the iframe: "1.1.4".
+    at VM116 sockjs.bundle.js:1
+(anonymous) @ VM116 sockjs.bundle.js:1
+postMessage (async)
+(anonymous) @ iframe.js:79
+setTimeout (async)
+post @ iframe.js:74
+./node_modules/sockjs-client/lib/transport/iframe.js.IframeTransport.postMessage @ iframe.js:122
+./node_modules/sockjs-client/lib/transport/iframe.js.IframeTransport._message @ iframe.js:96
+postMessage (async)
+postMessage @ VM116 sockjs.bundle.js:1
+t.bootstrap_iframe @ VM116 sockjs.bundle.js:1
+(anonymous) @ VM120 iframe.html:9
+VM135 sockjs.bundle.js:1 Uncaught Error: Incompatible SockJS! Main site uses: "1.1.5", the iframe: "1.1.4".
+    at VM116 sockjs.bundle.js:1

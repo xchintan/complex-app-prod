@@ -1,0 +1,12 @@
+FROM node:alpine
+WORKDIR "/app"
+COPY ./package.json .
+RUN npm install
+COPY . .
+CMD ["npm", "run", "dev"] 
+# Notice the use of 'dev', as oposed to 'npm run start'
+# The idea is to make use of 'nodemon' tool, so anytime
+# there's change in source file in a mapped volume, application
+# would restart.
+#
+#

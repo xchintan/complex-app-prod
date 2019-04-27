@@ -1,0 +1,66 @@
+# Compose file to run following containers
+# 1. Express Server: container name: server
+# 2. React Server:   contaienr name: client
+# 3. Worker Thread (watches on Redis Database)
+# 4. Redis DB
+# 5. Postgres DB
+# 6. Nginx Server
+# 
+# So, compose file will specify
+# 1. Which Postgres image to use.
+# 2. Which redis image to use.
+# 3. How to build server, map volume, and specify env variables(to connect to DBs)
+#
+
+
+version: '3'
+services:
+    postgres:
+        image: 'postgres:latest'
+
+    redis:
+        image: 'redis:latest'
+        
+    client:
+        build:
+            dockerfile: Dockerfile.dev
+            context:    ./client
+        volumes:
+            - /app/node_modules
+            - ./client:/app
+
+    api:
+        build: 
+            dockerfile: Dockerfile.dev
+            context: ./server   #Specifies in which folder to look for Dockefile.dev
+        volumes:
+            - /app/node_modules #Leave this folder as is, don't rewrite it.
+            - ./server:/app     #Mapping of ./server into /app in the contianer
+
+        environment:
+            - REDIS_HOST=redis #Same as service name of redis docker
+            - REDIS_PORT=6379  #Default port
+            - PGUSER=postgres
+            - PGHOST=postgres #Name of the service/container.
+            - PGDATABASE=postgres
+            - PGPASSWORD=postgres_password
+            - PGPORT=5432
+
+
+    worker:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./worker/
+        volumes:
+            - /app/node_modules/
+            - ./worker:/app
+
+    nginx:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./nginx/
+        restart: always
+
+        ports:
+            - '8080:80'
+            
