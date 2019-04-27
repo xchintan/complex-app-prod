@@ -1,0 +1,33 @@
+# What does this file do?
+#   1. Build a test image (before_install)
+#   2. Run tests (script)
+#   3. Build Docker images for production (after_success)
+#   4. Push the installed images to Dockerhub
+#   5. Notify an AWS instance
+#
+
+
+sudo: required  
+services:
+    - docker
+before_install:
+    - docker build -t myimage -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run myimage echo "Hello World"
+
+after-success:
+    - docker build -t xchintan/complex-app-client -f ./client/Dockerfile.prod ./client
+    - docker build -t xchintan/complex-app-api    -f ./server/Dockerfile.prod ./server
+    - docker build -t xchintan/complex-app-worker -f ./worker/Dockerfile.prod ./worker
+    - docker build -t xchintan/complex-app-ngingx -f ./nginx/Dockerfile.prod  ./nginx
+
+    # Login to Docker Hub
+    - echo "$DHUB_SCRT" | docker login -u "$DHUB_UNAME"  --password-stdin
+
+    # Push the images
+    - docker push xchintan/complex-app-client 
+    - docker push -t xchintan/complex-app-api   
+    - docker push -t xchintan/complex-app-worker 
+    - docker push -t xchintan/complex-app-ngingx
+
