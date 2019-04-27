@@ -11,10 +11,10 @@ sudo: required
 services:
     - docker
 before_install:
-    - docker build -t myimage -f ./client/Dockerfile.dev ./client
+    - docker build -t xchintan/test_image -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run myimage echo "Hello World"
+    - docker run xchintan/test_image echo "Hello World"
 
 after-success:
     - docker build -t xchintan/complex-app-client -f ./client/Dockerfile.prod ./client
