@@ -31,3 +31,18 @@ after_success:
     - docker push xchintan/complex-app-worker 
     - docker push xchintan/complex-app-ngingx
 
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app:  " complex-app-prod"
+    env:  "ComplexAppProd-env"
+    bucket_name:  "elasticbeanstalk-us-east-2-206661043318"
+    bucket_path:  "complex-app-prod"
+    on:
+      branch: master 
+      #Run deploy only when there is a commit in master branch
+    
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+      secure: "$AWS_SECRET_KEY"
+
