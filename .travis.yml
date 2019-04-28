@@ -34,7 +34,7 @@ after_success:
 deploy:
     provider: elasticbeanstalk
     region: "us-east-2"
-    app:  " complex-app-prod"
+    app:  "complex-app-prod"
     env:  "ComplexAppProd-env"
     bucket_name:  "elasticbeanstalk-us-east-2-206661043318"
     bucket_path:  "complex-app-prod"
