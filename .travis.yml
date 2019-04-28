@@ -26,8 +26,8 @@ after-success:
     - echo "$DHUB_SCRT" | docker login -u "$DHUB_UNAME"  --password-stdin
 
     # Push the images
-    - docker push -t xchintan/complex-app-client 
-    - docker push -t xchintan/complex-app-api   
-    - docker push -t xchintan/complex-app-worker 
-    - docker push -t xchintan/complex-app-ngingx
+    - docker push xchintan/complex-app-client 
+    - docker push xchintan/complex-app-api   
+    - docker push xchintan/complex-app-worker 
+    - docker push xchintan/complex-app-ngingx
 
